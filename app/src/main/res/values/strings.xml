@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Trips</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="upload_your_profile_photo">upload your profile photo</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="todo">TODO</string>
+    <string name="trip_app">Trip-App</string>
+    <string name="add_note">Add Note</string>
+    <string name="note">note</string>
+</resources>
