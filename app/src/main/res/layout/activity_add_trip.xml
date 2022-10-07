@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:background="#1AA7EC"
+            android:background="#1d4e89"
             android:contentDescription="@string/todo"
             android:src="@drawable/airplane"
             tools:ignore="ImageContrastCheck" />
