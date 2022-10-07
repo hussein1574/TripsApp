@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Trips"
         tools:targetApi="31">
         <activity
+            android:name=".EditTrip"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddTrip"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MyNotes"
             android:exported="false">
             <meta-data

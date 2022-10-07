@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".addTripActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="#1AA7EC"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/airplane"
+            tools:ignore="ImageContrastCheck" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/plane1"
+            android:drawablePadding="10dp"
+            android:hint="@string/from"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/plane1"
+            android:drawablePadding="10dp"
+            android:hint="@string/to"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/pen1"
+            android:drawablePadding="10dp"
+            android:hint="@string/title"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/calendar"
+            android:drawablePadding="10dp"
+            android:hint="@string/day"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/clock"
+            android:drawablePadding="10dp"
+            android:hint="@string/time"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:autofillHints="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/trip_type"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name" />
+
+        <EditText
+            android:id="@+id/roundCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/calendar"
+            android:drawablePadding="10dp"
+            android:hint="@string/day"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/roundTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/clock"
+            android:drawablePadding="10dp"
+            android:hint="@string/time"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_background"
+            android:text="@string/add"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
+
+
+
+    </LinearLayout>
+</ScrollView>

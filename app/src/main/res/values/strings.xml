@@ -14,4 +14,14 @@
     <string name="trip_app">Trip-App</string>
     <string name="add_note">Add Note</string>
     <string name="note">note</string>
+    <string name="day">Day</string>
+    <string name="add">ADD</string>
+    <string name="time">Time</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="title">Title</string>
+    <string name="trip_type">Trip Type</string>
+    <string name="start_point">Start Point</string>
+    <string name="end_point">End Point</string>
+    <string name="edit">EDIT</string>
 </resources>

@@ -23,7 +23,7 @@
                 android:id="@+id/main_view5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/top_view"
+                android:background="@drawable/note_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +34,7 @@
             <EditText
                 android:id="@+id/note_text"
                 android:layout_width="302dp"
-                android:layout_height="47dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="20dp"
                 android:autofillHints=""
                 android:ems="10"
@@ -51,7 +51,7 @@
                 android:layout_width="89dp"
                 android:layout_height="82dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/logo"
+                android:background="@drawable/airplane"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/main_view5"
                 app:layout_constraintTop_toTopOf="parent" />
