@@ -19,7 +19,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="200dp">
 
             <RelativeLayout
                 android:id="@+id/image_layout"
@@ -45,12 +46,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:text="STATUS"
+                    android:textAllCaps="true"
+                    android:text="@string/status"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@android:color/system_accent1_900"
+                    android:textColor="@color/black"
                     android:textSize="90sp"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
             </RelativeLayout>
 
 
@@ -58,7 +60,7 @@
                 android:id="@+id/data_layout"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/start_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Trip Name"
+                    android:text="@string/trip_name"
                     app:layout_constraintBottom_toTopOf="@+id/space2"
                     app:layout_constraintEnd_toStartOf="@+id/space"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -79,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Destination"
+                    android:text="@string/destination"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/space"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -89,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Source"
+                    android:text="@string/source"
                     app:layout_constraintEnd_toStartOf="@+id/space"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/space2" />
@@ -99,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Status"
+                    android:text="@string/status"
                     app:layout_constraintBottom_toTopOf="@+id/space2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/space" />
@@ -109,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="HH:MM"
+                    android:text="@string/time_temp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/space"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -119,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="DD/MM/YYYY"
+                    android:text="@string/date_temp"
                     app:layout_constraintEnd_toStartOf="@+id/space"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -146,7 +148,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="TODO"
+                    android:contentDescription="@string/my_trips"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/space"
@@ -156,14 +158,14 @@
 
             <Button
                 android:id="@+id/start_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
-                android:text="Start"
+                android:background="@color/color_theme"
+                android:text="@string/start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_layout" />
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

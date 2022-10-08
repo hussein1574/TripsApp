@@ -26,4 +26,11 @@
     <string name="edit">EDIT</string>
     <string name="my_trips">My Trips</string>
     <string name="history">History</string>
+    <string name="status">Status</string>
+    <string name="trip_name">Trip Name</string>
+    <string name="destination">Destination</string>
+    <string name="source">Source</string>
+    <string name="start">Start</string>
+    <string name="time_temp">HH:MM</string>
+    <string name="date_temp">DD/MM/YYYY</string>
 </resources>
