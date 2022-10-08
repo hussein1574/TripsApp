@@ -24,4 +24,6 @@
     <string name="start_point">Start Point</string>
     <string name="end_point">End Point</string>
     <string name="edit">EDIT</string>
+    <string name="my_trips">My Trips</string>
+    <string name="history">History</string>
 </resources>
