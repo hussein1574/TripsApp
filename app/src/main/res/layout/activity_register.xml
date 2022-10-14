@@ -125,7 +125,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/reg_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="47dp"
@@ -146,9 +146,9 @@
                 android:layout_marginTop="70dp"
                 android:text="@string/upload_your_profile_photo"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintEnd_toEndOf="@+id/reg_image"
+                app:layout_constraintStart_toStartOf="@+id/reg_image"
+                app:layout_constraintTop_toBottomOf="@+id/reg_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

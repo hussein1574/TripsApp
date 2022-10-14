@@ -9,9 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ImageView mImgTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         TextView appName = findViewById(R.id.app_name);
         View img = findViewById(R.id.logo_view);
         TextView E = findViewById(R.id.E);
+        mImgTest = findViewById(R.id.test_login);
 
         signIn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Login.class);
@@ -43,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, EditTrip.class);
             startActivity(intent);
         } );
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Login.mBitmap != null)
+            mImgTest.setImageBitmap(Login.mBitmap);
 
     }
 }
