@@ -88,6 +88,7 @@ public class Login extends AppCompatActivity {
         // Create a reference with an initial file path and name
         StorageReference imgRef =  mStorageReference.child("images/" + fileName);
         Task<byte[]> bytes = imgRef.getBytes(MEGABYTES);
+        while(!bytes.isComplete());
         mBitmap = BitmapFactory.decodeByteArray(bytes.getResult(),0,bytes.getResult().length);
     }
 }
