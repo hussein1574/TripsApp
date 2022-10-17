@@ -3,6 +3,7 @@ package com.seinical.trips;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -79,7 +80,7 @@ public class Login extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
             }
-
+            startActivity(new Intent(this, UpcomingActivity.class));
         });
     }
 
