@@ -2,15 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Trips" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/color_theme</item>
-        <item name="colorPrimaryVariant">@color/color_theme</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/classic_blue3</item>
+        <item name="colorPrimaryVariant">@color/classic_blue5</item>
+        <item name="colorOnPrimary">@color/classic_blue8</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/sepia3</item>
+        <item name="colorSecondaryVariant">@color/sepia5</item>
+        <item name="colorOnSecondary">@color/sepia8</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
 </resources>

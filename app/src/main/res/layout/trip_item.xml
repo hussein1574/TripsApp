@@ -2,19 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    style="@style/CustomFontText"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/trip_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTintMode="add"
+        android:layout_margin="10dp"
         android:animateLayoutChanges="true"
-        android:id="@+id/trip_card"
+        android:backgroundTintMode="add"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:cardUseCompatPadding="true"
+        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +74,7 @@
 
                 <TextView
                     android:id="@+id/trip_name_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -82,6 +85,7 @@
 
                 <TextView
                     android:id="@+id/dest_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -92,6 +96,7 @@
 
                 <TextView
                     android:id="@+id/source_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -102,6 +107,7 @@
 
                 <TextView
                     android:id="@+id/status_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -112,6 +118,7 @@
 
                 <TextView
                     android:id="@+id/time_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -122,6 +129,7 @@
 
                 <TextView
                     android:id="@+id/date_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -132,6 +140,7 @@
 
                 <Space
                     android:id="@+id/space"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -160,12 +169,15 @@
                     app:srcCompat="@drawable/calendar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/start_btn"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/CustomButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/color_theme"
+                android:layout_margin="0dp"
+                android:background="?attr/colorSecondary"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="0dp"
                 android:text="@string/start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
