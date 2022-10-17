@@ -33,4 +33,6 @@
     <string name="start">Start</string>
     <string name="time_temp">HH:MM</string>
     <string name="date_temp">DD/MM/YYYY</string>
+    <string name="cancel_trip">Cancel Trip</string>
+    <string name="menu">3 dots icon</string>
 </resources>

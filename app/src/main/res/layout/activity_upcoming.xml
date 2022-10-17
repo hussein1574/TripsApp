@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/plane_sky"
             android:theme="@style/CustomToolbarTheme"
-            app:collapsedTitleGravity="center_vertical|center_horizontal"
+            app:collapsedTitleGravity="center_horizontal"
             app:collapsedTitleTextAppearance="@style/CustomFontText"
             app:contentScrim="?attr/colorPrimaryVariant"
             app:expandedTitleTextAppearance="@style/CustomBoldText"
@@ -39,7 +39,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
+                android:layout_height="60dp"
                 app:title="@string/my_trips" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

@@ -33,8 +33,11 @@
     </style>
 
     <style name="CustomButton" parent="@android:style/Widget.Material.Light.Button">
-        <item name="android:fontFamily">@font/concert__one</item>
+        <item name="android:fontFamily">@font/concert_one</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:background">?attr/colorSecondary</item>
+
     </style>
 
     <style name="CustomTextView" parent="@style/Widget.AppCompat.TextView">

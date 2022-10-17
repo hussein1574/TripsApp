@@ -2,10 +2,14 @@ package com.seinical.trips.data;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -46,6 +50,22 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         holder.status.setText(trip.getStatus());
         holder.source.setText(trip.getSource());
         holder.destination.setText(trip.getDestination());
+
+        holder.menuIcon.setOnClickListener(view ->{
+            PopupMenu tripMenu = new PopupMenu(context,holder.menuIcon);
+            tripMenu.inflate(R.menu.trip_item_menu);
+            tripMenu.show();
+            tripMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.trip_menu_note) {
+                    Toast.makeText(context, "Add Note", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.trip_menu_cancel) {
+                    Toast.makeText(context, "Trip Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            });
+        });
+
     }
 
     @Override
@@ -63,6 +83,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         TextView destination;
         Button start;
         CardView trip;
+        ImageButton menuIcon;
         androidx.constraintlayout.widget.ConstraintLayout data;
 
         public TripsViewHolder(@NonNull View itemView) {
@@ -95,6 +116,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
             data = itemView.findViewById(R.id.data_layout);
             start = itemView.findViewById(R.id.start_btn);
             trip = itemView.findViewById(R.id.trip_card);
+            menuIcon = itemView.findViewById(R.id.trip_menu_btn);
         }
     }
 }
