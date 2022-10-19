@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +34,7 @@ public class Login extends AppCompatActivity {
     private EditText mPassword;
     private final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://trips-app-dae7a-default-rtdb.firebaseio.com/");
     private final StorageReference mStorageReference =  FirebaseStorage.getInstance().getReference();
-
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static Bitmap mBitmap = null;
 
     @Override
@@ -50,13 +52,13 @@ public class Login extends AppCompatActivity {
     }
     private void login() {
         mLoginBtn.setOnClickListener(view -> {
-            final String emailText = mEmail.getText().toString().trim().replace(".",",");
+            final String emailText = mEmail.getText().toString().trim();
             final String passwordText = mPassword.getText().toString().trim();
             if(emailText.isEmpty() || passwordText.isEmpty())
                 Toast.makeText(Login.this,"please fill all fields",Toast.LENGTH_LONG).show();
             else
             {
-                mDatabaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+              /*  mDatabaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.hasChild(emailText)){
@@ -64,7 +66,8 @@ public class Login extends AppCompatActivity {
                             assert getPass != null;
                             if(getPass.equals(passwordText)){
                                  downloadImage(snapshot.child(emailText).child("phone").getValue(String.class));
-                                 finish();
+                                 Intent intent = new Intent(Login.this, UpcomingActivity.class);
+                                 startActivity(intent);
                             }else{
                                 mPassword.setError("wrong password");
                                 mPassword.requestFocus();
@@ -78,9 +81,18 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}
-                });
+                }); */
+                mAuth.signInWithEmailAndPassword(emailText, passwordText)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                Uri test = mAuth.getCurrentUser().getPhotoUrl();
+                                startActivity(new Intent(this, UpcomingActivity.class));
+                            } else {
+                                Toast.makeText(Login.this, "Wrong password or email ",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
-            startActivity(new Intent(this, UpcomingActivity.class));
         });
     }
 
