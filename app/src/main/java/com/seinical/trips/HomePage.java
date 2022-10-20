@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,19 +30,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import com.seinical.trips.data.TempTripsDataManager;
+import com.seinical.trips.data.Trip;
 import com.seinical.trips.databinding.ActivityHomePageBinding;
+import com.seinical.trips.ui.upcoming.UpcomingFragment;
 
 
 public class HomePage extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomePageBinding binding;
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static final long MEGABYTES = 1024 * 1024;
     private final StorageReference mStorageReference =  FirebaseStorage.getInstance().getReference();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid()).child("Trips");
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -77,6 +87,30 @@ public class HomePage extends AppCompatActivity {
             userImage.setImageBitmap(downloadImage(user.getUid()));
 
         }
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot != null)
+                {
+                    TempTripsDataManager.getInstance().getUpcoming().clear();
+                    TempTripsDataManager.getInstance().getHistory().clear();
+                }
+                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+
+                    Trip trip = new Trip(dataSnapshot.child("name").getValue(String.class),dataSnapshot.child("date").getValue(String.class),
+                            dataSnapshot.child("time").getValue(String.class),dataSnapshot.child("status").getValue(String.class),
+                            dataSnapshot.child("source").getValue(String.class),dataSnapshot.child("destination").getValue(String.class));
+                    TempTripsDataManager.getInstance().addTrip(trip);
+                }
+                UpcomingFragment.adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
     @SuppressWarnings("StatementWithEmptyBody")

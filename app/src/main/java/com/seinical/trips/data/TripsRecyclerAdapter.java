@@ -3,6 +3,7 @@ package com.seinical.trips.data;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import androidx.transition.AutoTransition;
 import androidx.transition.Transition;
 import androidx.transition.TransitionManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.seinical.trips.MyNotes;
 import com.seinical.trips.R;
 
@@ -25,6 +29,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdapter.TripsViewHolder>{
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid()).child("Trips");
 
     Context context;
     List<Trip> trips;
@@ -54,7 +60,10 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         holder.destination.setText(trip.getDestination());
         holder.statusTitle.setText(trip.getStatus());
         if(!Objects.equals(trip.getStatus(), "Upcoming"))
+        {
             holder.start.setVisibility(View.INVISIBLE);
+            holder.menuIcon.setVisibility(View.INVISIBLE);
+        }
 
         holder.menuIcon.setOnClickListener(view ->{
             PopupMenu tripMenu = new PopupMenu(context,holder.menuIcon);
@@ -64,10 +73,16 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
                 int id = item.getItemId();
                 if (id == R.id.trip_menu_note) {
                     Intent intent = new Intent(context, MyNotes.class);
+                    intent.putExtra("trip_name", trip.getName());
                     context.startActivity(intent);
-                 //   Toast.makeText(context, "Add Note", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.trip_menu_cancel) {
+                    mDatabaseReference.child(trip.getName()).child("status").setValue("Cancelled");
                     Toast.makeText(context, "Trip Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else if(id == R.id.trip_menu_edit)
+                {
+                    Toast.makeText(context, "Trip Edit ", Toast.LENGTH_SHORT).show();
+
                 }
                 return false;
             });
@@ -92,6 +107,8 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         Button start;
         CardView trip;
         ImageButton menuIcon;
+        MenuItem cancelBtn;
+        MenuItem editBtn;
 
         androidx.constraintlayout.widget.ConstraintLayout data;
 
@@ -127,6 +144,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
             start = itemView.findViewById(R.id.start_btn);
             trip = itemView.findViewById(R.id.trip_card);
             menuIcon = itemView.findViewById(R.id.trip_menu_btn);
+
         }
     }
 }

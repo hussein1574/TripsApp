@@ -13,6 +13,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.seinical.trips.R;
 
 import java.util.List;
@@ -21,6 +24,9 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     Context context;
     List<Note> mNotes;
     LayoutInflater layoutInflater;
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference(mAuth.getCurrentUser().getUid());
+
 
     public NotesRecyclerAdapter(Context context, List<Note> notes) {
         this.context = context;
@@ -41,7 +47,10 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         holder.details.setText(note.getDetails());
 
 
-        holder.deleteIcon.setOnClickListener(view -> Toast.makeText(context, "Note deleted Successfully", Toast.LENGTH_SHORT).show());
+        holder.deleteIcon.setOnClickListener(view -> {
+            mDatabaseReference.child("Trips").child(note.getTripName()).child("Notes").child(note.getDetails()).removeValue();
+            Toast.makeText(context, "Note deleted Successfully", Toast.LENGTH_SHORT).show();
+                });
 
     }
 

@@ -15,20 +15,12 @@ public class TempNotesDataManager {
             synchronized (TempNotesDataManager.class) {
                 if (instance == null) {
                     instance = new TempNotesDataManager();
-                    instance.initializeNotes();
                 }
             }
         }
         return instance;
     }
-private  void initializeNotes() {
-        notes.add(new Note("Test 1"));
-    notes.add(new Note("Test 2"));
-    notes.add(new Note("Test 3"));
-    notes.add(new Note("Test 4"));
-    notes.add(new Note("Test 5"));
-    notes.add(new Note("Test 6"));
-}
+
 
 
     public List<Note> getNotes() {

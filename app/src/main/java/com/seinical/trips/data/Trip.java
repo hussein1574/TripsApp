@@ -1,12 +1,19 @@
 package com.seinical.trips.data;
 
+
+
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Trip {
-    private final String name;
-    private final String date;
-    private final String time;
-    private final String status;
-    private final String source;
-    private final String destination;
+    private  String name;
+    private  String date;
+    private  String time;
+    private  String status;
+    private  String source;
+    private  String destination;
 
     public Trip(String name, String date, String time, String status, String source, String destination) {
         this.name = name;
@@ -51,4 +58,28 @@ public class Trip {
         return destination;
     }
 
-   }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+}
