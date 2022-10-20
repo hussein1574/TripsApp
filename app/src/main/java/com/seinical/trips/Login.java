@@ -85,8 +85,7 @@ public class Login extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(emailText, passwordText)
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
-                                Uri test = mAuth.getCurrentUser().getPhotoUrl();
-                                startActivity(new Intent(this, UpcomingActivity.class));
+                                startActivity(new Intent(this, HomePage.class));
                             } else {
                                 Toast.makeText(Login.this, "Wrong password or email ",
                                         Toast.LENGTH_SHORT).show();

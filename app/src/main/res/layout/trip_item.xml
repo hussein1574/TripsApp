@@ -56,9 +56,9 @@
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/black"
-                    android:textSize="90sp"
+                    android:textSize="80sp"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="visible" />
 
                 <ImageButton
                     android:id="@+id/trip_menu_btn"

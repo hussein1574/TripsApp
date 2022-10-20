@@ -104,6 +104,7 @@ public class Register extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     uploadImage(task.getResult().getUser());
+                                    setUsername(task.getResult().getUser());
                                     setAdditionalData(task.getResult().getUser().getUid());
                                     Toast.makeText(Register.this, "User registered successfully", Toast.LENGTH_LONG).show();
                                     finish();
@@ -115,55 +116,12 @@ public class Register extends AppCompatActivity {
                 }
             }
 
-           /* if (emailText[0].isEmpty() || passwordText.isEmpty() || usernameText.isEmpty()
-                    || confirmPasswordText.isEmpty() || phoneNumberText.isEmpty())
-                Toast.makeText(Register.this, "please fill all fields", Toast.LENGTH_LONG).show();
-            else if (!Patterns.EMAIL_ADDRESS.matcher(emailText[0]).matches()) {
-                mEmail.setError("email is not valid");
-                mEmail.requestFocus();
-            } else if (!passwordText.equals(confirmPasswordText)) {
-                mConfirmPassword.setError("password not matched");
-                mConfirmPassword.requestFocus();
-            } else {
-                mDatabaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        emailText[0] = emailText[0].replace(".", ",");
-                        if (snapshot.hasChild(emailText[0])) {
-                            mEmail.setError("email already registered");
-                            mEmail.requestFocus();
-                        } else {
-                            if(uploadImage(phoneNumberText))
-                            {
-                                mDatabaseReference.child("users").child(emailText[0]).child("username").setValue(usernameText);
-                                mDatabaseReference.child("users").child(emailText[0]).child("phone").setValue(phoneNumberText);
-                                mDatabaseReference.child("users").child(emailText[0]).child("password").setValue(passwordText);
-                                Toast.makeText(Register.this, "user registered successfully", Toast.LENGTH_LONG).show();
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(Register.this, "Failed to upload image", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-
-                });
-
-            } */
         });
     }
 
-    private void uploadImage(FirebaseUser user) {
+    private void setUsername(FirebaseUser user) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(mUsernameText)
-                .setPhotoUri(mSelectedImageUri)
                 .build();
         user.updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -175,6 +133,13 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void uploadImage(FirebaseUser user) {
+        String Uid = user.getUid();
+        StorageReference imagesRef = mStorageReference.child("images/" + Uid);
+        imagesRef.putFile(mSelectedImageUri).addOnFailureListener(e -> Toast.makeText(Register.this, "failed to upload photo", Toast.LENGTH_LONG).show());
+
     }
 
     private void setAdditionalData(String uid) {

@@ -1,6 +1,7 @@
 package com.seinical.trips.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.transition.AutoTransition;
 import androidx.transition.Transition;
 import androidx.transition.TransitionManager;
 
+import com.seinical.trips.MyNotes;
 import com.seinical.trips.R;
 
 import java.util.List;
@@ -50,6 +52,9 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         holder.status.setText(trip.getStatus());
         holder.source.setText(trip.getSource());
         holder.destination.setText(trip.getDestination());
+        holder.statusTitle.setText(trip.getStatus());
+        if(trip.getStatus() != "Upcoming")
+            holder.start.setVisibility(View.INVISIBLE);
 
         holder.menuIcon.setOnClickListener(view ->{
             PopupMenu tripMenu = new PopupMenu(context,holder.menuIcon);
@@ -58,7 +63,9 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
             tripMenu.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
                 if (id == R.id.trip_menu_note) {
-                    Toast.makeText(context, "Add Note", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, MyNotes.class);
+                    context.startActivity(intent);
+                 //   Toast.makeText(context, "Add Note", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.trip_menu_cancel) {
                     Toast.makeText(context, "Trip Cancelled Successfully", Toast.LENGTH_SHORT).show();
                 }
@@ -79,11 +86,13 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         TextView date;
         TextView time;
         TextView status;
+        TextView statusTitle;
         TextView source;
         TextView destination;
         Button start;
         CardView trip;
         ImageButton menuIcon;
+
         androidx.constraintlayout.widget.ConstraintLayout data;
 
         public TripsViewHolder(@NonNull View itemView) {
@@ -111,6 +120,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
             date = itemView.findViewById(R.id.date_tv);
             time = itemView.findViewById(R.id.time_tv);
             status = itemView.findViewById(R.id.status_tv);
+            statusTitle = itemView.findViewById(R.id.status_title_tv);
             source = itemView.findViewById(R.id.source_tv);
             destination = itemView.findViewById(R.id.dest_tv);
             data = itemView.findViewById(R.id.data_layout);
