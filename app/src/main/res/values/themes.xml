@@ -17,7 +17,7 @@
         <item name="android:fontFamily">@font/concert__one</item>
     </style>
 
-    <style name="CustomToolbarTheme"  parent="Theme.Trips">
+    <style name="CustomToolbarTheme" parent="Theme.Trips">
         <!-- HERE ARE THE CHANGES - Change color of different texts -->
         <item name="android:textColorPrimary">?attr/colorSecondary</item>
     </style>
@@ -44,6 +44,15 @@
         <item name="android:fontFamily">@font/concert__one</item>
         <item name="android:textSize">15sp</item>
     </style>
+
+    <style name="Theme.Trips.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Trips.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Trips.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>
