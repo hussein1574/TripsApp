@@ -3,7 +3,6 @@ package com.seinical.trips.data;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +22,7 @@ import com.seinical.trips.MyNotes;
 import com.seinical.trips.R;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdapter.TripsViewHolder>{
 
@@ -53,7 +53,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         holder.source.setText(trip.getSource());
         holder.destination.setText(trip.getDestination());
         holder.statusTitle.setText(trip.getStatus());
-        if(trip.getStatus() != "Upcoming")
+        if(!Objects.equals(trip.getStatus(), "Upcoming"))
             holder.start.setVisibility(View.INVISIBLE);
 
         holder.menuIcon.setOnClickListener(view ->{
@@ -80,7 +80,7 @@ public class TripsRecyclerAdapter extends RecyclerView.Adapter<TripsRecyclerAdap
         return trips.size();
     }
 
-    public class TripsViewHolder extends RecyclerView.ViewHolder {
+    public static class TripsViewHolder extends RecyclerView.ViewHolder {
         int visibility;
         TextView name;
         TextView date;

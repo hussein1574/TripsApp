@@ -1,12 +1,12 @@
 package com.seinical.trips.data;
 
 public class Trip {
-    private String name;
-    private String date;
-    private String time;
-    private String status;
-    private String source;
-    private String destination;
+    private final String name;
+    private final String date;
+    private final String time;
+    private final String status;
+    private final String source;
+    private final String destination;
 
     public Trip(String name, String date, String time, String status, String source, String destination) {
         this.name = name;
@@ -21,47 +21,34 @@ public class Trip {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+
 
     public String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+
 
     public String getSource() {
         return source;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
+
 
     public String getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-}
+   }

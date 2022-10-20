@@ -4,18 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.AutoTransition;
-import androidx.transition.Transition;
-import androidx.transition.TransitionManager;
+
 
 import com.seinical.trips.R;
 
@@ -36,7 +32,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     @Override
     public NotesRecyclerAdapter.NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewItem = layoutInflater.inflate(R.layout.note_item,parent,false);
-        return new NotesRecyclerAdapter.NotesViewHolder(viewItem);
+        return new NotesViewHolder(viewItem);
     }
 
     @Override
@@ -45,9 +41,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         holder.details.setText(note.getDetails());
 
 
-        holder.deleteIcon.setOnClickListener(view ->{
-            Toast.makeText(context, "Note deleted Successfully", Toast.LENGTH_SHORT).show();
-        });
+        holder.deleteIcon.setOnClickListener(view -> Toast.makeText(context, "Note deleted Successfully", Toast.LENGTH_SHORT).show());
 
     }
 
@@ -56,12 +50,10 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         return mNotes.size();
     }
 
-    public class NotesViewHolder extends RecyclerView.ViewHolder {
-        int visibility;
+    public static class NotesViewHolder extends RecyclerView.ViewHolder {
         CardView note;
         ImageButton deleteIcon;
         TextView details;
-        androidx.constraintlayout.widget.ConstraintLayout data;
 
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);

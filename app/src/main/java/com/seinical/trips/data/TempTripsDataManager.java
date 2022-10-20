@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TempTripsDataManager {
-    private static TempTripsDataManager instance = null;
+    private static volatile TempTripsDataManager instance = null;
     private final List<Trip> upcoming = new ArrayList<>();
     private final List<Trip> history = new ArrayList<>();
 

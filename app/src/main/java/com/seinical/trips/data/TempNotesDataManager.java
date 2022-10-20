@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TempNotesDataManager {
-    private static TempNotesDataManager instance = null;
+    private static volatile TempNotesDataManager instance = null;
     private final List<Note> notes = new ArrayList<>();
 
 

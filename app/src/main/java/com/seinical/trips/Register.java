@@ -2,7 +2,6 @@ package com.seinical.trips;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -20,21 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
@@ -48,7 +43,7 @@ public class Register extends AppCompatActivity {
     private TextView mSelectImage;
     private final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://trips-app-dae7a-default-rtdb.firebaseio.com/");
     private final StorageReference mStorageReference =  FirebaseStorage.getInstance().getReference();
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String mUsernameText;
     private String mPhoneNumberText;
 
@@ -103,7 +98,7 @@ public class Register extends AppCompatActivity {
                             .addOnCompleteListener(this, task -> {
                                 if (task.isSuccessful()) {
 
-                                    uploadImage(task.getResult().getUser());
+                                    uploadImage(Objects.requireNonNull(task.getResult().getUser()));
                                     setUsername(task.getResult().getUser());
                                     setAdditionalData(task.getResult().getUser().getUid());
                                     Toast.makeText(Register.this, "User registered successfully", Toast.LENGTH_LONG).show();
@@ -124,13 +119,9 @@ public class Register extends AppCompatActivity {
                 .setDisplayName(mUsernameText)
                 .build();
         user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            String test = mAuth.getCurrentUser().getDisplayName();
-                            Log.d("HFirebase", "User profile updated.");
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                             Log.d("HFirebase", "User profile updated.");
                     }
                 });
     }

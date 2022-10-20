@@ -1,14 +1,14 @@
 package com.seinical.trips;
 
-import static android.content.Intent.ACTION_OPEN_DOCUMENT;
 
-import android.app.PendingIntent;
+
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
+
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
@@ -25,25 +25,21 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.seinical.trips.data.Trip;
+
 import com.seinical.trips.databinding.ActivityHomePageBinding;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomePageBinding binding;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private ImageView mUserImage;
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static final long MEGABYTES = 1024 * 1024;
     private final StorageReference mStorageReference =  FirebaseStorage.getInstance().getReference();
 
@@ -56,13 +52,8 @@ public class HomePage extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarHomePage.toolbar);
-        binding.appBarHomePage.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        binding.appBarHomePage.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -77,19 +68,18 @@ public class HomePage extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView userName = headerView.findViewById(R.id.userUsername);
         TextView userEmail = headerView.findViewById(R.id.userEmail);
-        mUserImage = headerView.findViewById(R.id.userImg);
+        ImageView userImage = headerView.findViewById(R.id.userImg);
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null)
         {
             userName.setText(user.getDisplayName());
             userEmail.setText(user.getEmail());
-           // if(user.getPhotoUrl() != null)
-           //     mUserImage.setImageURI(user.getPhotoUrl());
-            mUserImage.setImageBitmap(downloadImage(user.getUid()));
+            userImage.setImageBitmap(downloadImage(user.getUid()));
 
         }
 
     }
+    @SuppressWarnings("StatementWithEmptyBody")
     private Bitmap downloadImage(String fileName)
     {
         // Create a reference with an initial file path and name
