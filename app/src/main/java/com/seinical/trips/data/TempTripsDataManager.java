@@ -1,10 +1,22 @@
 package com.seinical.trips.data;
 
+import android.os.Build;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TempTripsDataManager {
-    private static TempTripsDataManager instance = null;
+    private final DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+    private final FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+    private static volatile TempTripsDataManager instance = null;
     private final List<Trip> upcoming = new ArrayList<>();
     private final List<Trip> history = new ArrayList<>();
 
@@ -15,35 +27,10 @@ public class TempTripsDataManager {
             synchronized (TempTripsDataManager.class) {
                 if (instance == null) {
                     instance = new TempTripsDataManager();
-                    instance.initializeTrips();
                 }
             }
         }
         return instance;
-    }
-
-    private void initializeTrips() {
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        upcoming.add(new Trip("Trip1","17/10/2022","17:00","Upcoming","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Completed","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Cancelled","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Cancelled","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Cancelled","Cairo","Cairo"));
-        history.add(new Trip("Trip1","17/10/2022","17:00","Cancelled","Cairo","Cairo"));
     }
 
     public List<Trip> getUpcoming() {

@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    style="@style/CustomFontText"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomFontText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -50,20 +50,26 @@
                     android:id="@+id/status_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="103dp"
                     android:gravity="center"
                     android:text="@string/status"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/black"
-                    android:textSize="90sp"
+                    android:textSize="60sp"
                     android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:visibility="visible"
+                    tools:ignore="RelativeOverlap" />
 
                 <ImageButton
                     android:id="@+id/trip_menu_btn"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"

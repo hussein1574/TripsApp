@@ -3,8 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
 
-        android:title="@string/add_note"
-        android:id="@+id/trip_menu_note"/>
+        android:id="@+id/trip_menu_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/add_note" />
+    <item
+
+        android:id="@+id/trip_menu_edit"
+        android:title="Edit Trip" />
     <item
         android:title="@string/cancel_trip"
         android:id="@+id/trip_menu_cancel"/>
