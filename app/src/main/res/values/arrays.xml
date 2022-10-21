@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="trip_type">one-trip,two-trip</string-array>
+    <string-array name="trip_type">
+        <item>One Direction</item>
+        <item>Two Direction</item>
+    </string-array>
 </resources>

@@ -33,6 +33,7 @@
             android:drawablePadding="10dp"
             android:hint="@string/from"
             android:inputType="text"
+            android:id="@+id/editOrigin"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:autofillHints="" />
@@ -52,6 +53,7 @@
             android:drawablePadding="10dp"
             android:hint="@string/to"
             android:inputType="text"
+            android:id="@+id/editDestination"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:autofillHints="" />
@@ -64,6 +66,7 @@
             android:drawablePadding="10dp"
             android:hint="@string/title"
             android:inputType="text"
+            android:id="@+id/editTitle"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:autofillHints="" />
@@ -100,6 +103,7 @@
             android:layout_margin="20dp"
             android:background="@drawable/button_background"
             android:text="@string/edit"
+            android:id="@+id/editButton"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 

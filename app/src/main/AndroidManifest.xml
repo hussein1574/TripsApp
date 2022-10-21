@@ -23,14 +23,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".EditTrip"
+            android:name=".AddTrip"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddTrip"
+            android:name=".MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -51,14 +51,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".EditTrip"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

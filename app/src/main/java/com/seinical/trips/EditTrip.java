@@ -7,8 +7,19 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,12 +28,42 @@ import java.util.Locale;
 public class EditTrip extends AppCompatActivity {
 
     final Calendar myCalendar= Calendar.getInstance();
+    EditText editTimeText;
+    EditText editCalendarText;
+    EditText editOrigin;
+    EditText editDestination;
+    EditText editTitle;
+    AppCompatButton editButton;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    String origin;
+    String destination;
+    String title;
+    String day;
+    String timer;
+    int tripID;
+    TripClass tripClass;
+    ////static data that will return from intent
+    String origin1="Europe";
+    String destination1="Egypt";
+    String title1="Back to Om Eldonia";
+    String day1="11/5/22";
+    String timer1="12:05";
+    int tripID1=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_trip);
-        EditText timeText=findViewById(R.id.editTime);
-        EditText calendarText=findViewById(R.id.editCalendar);
+        InitializeComponents();
+        editOrigin.setText(origin1);
+        editDestination.setText(destination1);
+        editTitle.setText(title1);
+        editTimeText.setText(timer1);
+        editCalendarText.setText(day1);
+        edit_trip();
+    }
+
+    private void edit_trip() {
         DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -32,28 +73,73 @@ public class EditTrip extends AppCompatActivity {
 
             }
         };
-        calendarText.setOnTouchListener(new View.OnTouchListener() {
+        editCalendarText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction()==MotionEvent.ACTION_UP){
                     new DatePickerDialog(EditTrip.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                    updateLabel(calendarText);
+                    updateLabel(editCalendarText);
                     return true;
                 }
                 return false;
             }
         });
-        timeText.setOnTouchListener(new View.OnTouchListener() {
+        editTimeText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction()==MotionEvent.ACTION_UP)
                 {
-                    setTime(timeText);
+                    setTime(editTimeText);
                 }
                 return false;
             }
         });
 
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseDatabase= FirebaseDatabase.getInstance();
+                databaseReference=firebaseDatabase.getReference();
+                origin=editOrigin.getText().toString();
+                destination=editDestination.getText().toString();
+                title=editTitle.getText().toString();
+                day=editCalendarText.getText().toString();
+                timer=editTimeText.getText().toString();
+                if(origin.isEmpty()||destination.isEmpty()||title.isEmpty()||day.isEmpty()||timer.isEmpty()){
+                    Toast.makeText(EditTrip.this,"please fill all fields",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    if(dataChanged()){
+                        _newData();
+                        databaseReference.child("users").child("noressam2000@gmail").child("Trips").child("3").setValue(tripClass);
+                        Toast.makeText(EditTrip.this,"Data has been updated",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(EditTrip.this,"Data is same and can't be updated",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    private void _newData(){
+        tripClass=new TripClass(origin,destination,title,day,timer);
+    }
+    private boolean dataChanged(){
+        if(origin1.equals(origin)||destination1.equals(destination)||title1.equals(title)||timer1.equals(timer)||day1.equals(day))
+            return true;
+        else
+            return false;
+    }
+    private void InitializeComponents() {
+        editTimeText =findViewById(R.id.editTime);
+        editCalendarText =findViewById(R.id.editCalendar);
+        editOrigin=findViewById(R.id.editOrigin);
+        editDestination=findViewById(R.id.editDestination);
+        editTitle=findViewById(R.id.editTitle);
+        editButton=findViewById(R.id.editButton);
 
     }
     private void setTime(EditText editText){
