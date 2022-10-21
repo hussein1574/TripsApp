@@ -2,7 +2,6 @@ package com.seinical.trips;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -11,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,16 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
@@ -42,6 +43,9 @@ public class Register extends AppCompatActivity {
     private TextView mSelectImage;
     private final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://trips-app-dae7a-default-rtdb.firebaseio.com/");
     private final StorageReference mStorageReference =  FirebaseStorage.getInstance().getReference();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private String mUsernameText;
+    private String mPhoneNumberText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,63 +68,77 @@ public class Register extends AppCompatActivity {
     private void register() {
         mRegisterBtn.setOnClickListener(view -> {
             final String[] emailText = {mEmail.getText().toString().trim()};
-            final String usernameText = mUsername.getText().toString().trim();
+            mUsernameText = mUsername.getText().toString().trim();
             final String passwordText = mPassword.getText().toString().trim();
             final String confirmPasswordText = mConfirmPassword.getText().toString().trim();
-            final String phoneNumberText = mPhoneNumber.getText().toString().trim();
+            mPhoneNumberText = mPhoneNumber.getText().toString().trim();
 
-            if (emailText[0].isEmpty() || passwordText.isEmpty() || usernameText.isEmpty()
-                    || confirmPasswordText.isEmpty() || phoneNumberText.isEmpty())
-                Toast.makeText(Register.this, "please fill all fields", Toast.LENGTH_LONG).show();
-            else if (!Patterns.EMAIL_ADDRESS.matcher(emailText[0]).matches()) {
-                mEmail.setError("email is not valid");
+            if(mUsernameText.isEmpty()|| emailText[0].isEmpty()|| passwordText.isEmpty()|| confirmPasswordText.isEmpty() || mPhoneNumberText.isEmpty())
+                Toast.makeText(Register.this,"Please fill all data",Toast.LENGTH_LONG).show();
+            else if(!Patterns.EMAIL_ADDRESS.matcher(emailText[0]).matches()){
+                mEmail.setError("Email is not valid");
                 mEmail.requestFocus();
-            } else if (!passwordText.equals(confirmPasswordText)) {
-                mConfirmPassword.setError("password not matched");
-                mConfirmPassword.requestFocus();
-            } else {
-                mDatabaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        emailText[0] = emailText[0].replace(".", ",");
-                        if (snapshot.hasChild(emailText[0])) {
-                            mEmail.setError("email already registered");
-                            mEmail.requestFocus();
-                        } else {
-                            if(uploadImage(phoneNumberText))
-                            {
-                                mDatabaseReference.child("users").child(emailText[0]).child("username").setValue(usernameText);
-                                mDatabaseReference.child("users").child(emailText[0]).child("phone").setValue(phoneNumberText);
-                                mDatabaseReference.child("users").child(emailText[0]).child("password").setValue(passwordText);
-                                Toast.makeText(Register.this, "user registered successfully", Toast.LENGTH_LONG).show();
-                                finish();
-                            }
-                            else
-                            {
-                                Toast.makeText(Register.this, "Failed to upload image", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-
-                });
-
             }
+            else if(!passwordText.equals(confirmPasswordText)){
+                mConfirmPassword.setError("Password not matched");
+                mConfirmPassword.requestFocus();
+            }else if(passwordText.length()<8){
+                mPassword.setError("Password is too short");
+                mPassword.requestFocus();
+            } else if (!Patterns.PHONE.matcher(mPhoneNumberText).matches())
+            {
+                mPhoneNumber.setError("Phone number is not valid");
+                mPhoneNumber.requestFocus();
+            }
+            else{
+                if(mSelectedImageUri == null)
+                    Toast.makeText(Register.this, "Please choose a photo", Toast.LENGTH_SHORT).show();
+                else{
+                    mAuth.createUserWithEmailAndPassword(emailText[0], passwordText)
+                            .addOnCompleteListener(this, task -> {
+                                if (task.isSuccessful()) {
+
+                                    uploadImage(Objects.requireNonNull(task.getResult().getUser()));
+                                    setUsername(task.getResult().getUser());
+                                    setAdditionalData(task.getResult().getUser().getUid());
+                                    Toast.makeText(Register.this, "User registered successfully", Toast.LENGTH_LONG).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(Register.this, "This email is already registered",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
+
         });
     }
 
-    private boolean uploadImage(String imageName) {
-        final boolean[] uploadStatue = new boolean[1];
-        uploadStatue[0] = true;
-        StorageReference imagesRef = mStorageReference.child("images/" + imageName);
-        imagesRef.putFile(mSelectedImageUri).addOnSuccessListener(taskSnapshot -> uploadStatue[0] = true).addOnFailureListener(e -> uploadStatue[0] = false);
-        return uploadStatue[0];
+    private void setUsername(FirebaseUser user) {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mUsernameText)
+                .build();
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                             Log.d("HFirebase", "User profile updated.");
+                    }
+                });
     }
+
+    private void uploadImage(FirebaseUser user) {
+        String Uid = user.getUid();
+        StorageReference imagesRef = mStorageReference.child("images/" + Uid);
+        imagesRef.putFile(mSelectedImageUri).addOnFailureListener(e -> Toast.makeText(Register.this, "failed to upload photo", Toast.LENGTH_LONG).show());
+
+    }
+
+    private void setAdditionalData(String uid) {
+        mDatabaseReference.child(uid).child("phoneNumber").setValue(mPhoneNumberText).addOnFailureListener(e -> Toast.makeText(Register.this, "Failed to set phone number", Toast.LENGTH_LONG).show());
+
+    }
+
+
 
     //prepare intent to open gallery
     private void imageChooser() {

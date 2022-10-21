@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomFontText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/trip_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:animateLayoutChanges="true"
         android:backgroundTintMode="add"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:cardUseCompatPadding="true"
+        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,24 +40,45 @@
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
                     android:contentDescription="@string/my_trips"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@drawable/plane_sky_flight" />
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/plane_sky_flight" />
 
                 <TextView
                     android:id="@+id/status_title_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginEnd="4dp"
                     android:gravity="center"
-                    android:textAllCaps="true"
                     android:text="@string/status"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/black"
-                    android:textSize="90sp"
+                    android:textSize="60sp"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageButton
+                    android:id="@+id/trip_menu_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/menu"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/three_dots"
+                    tools:ignore="TouchTargetSizeCheck" />
             </RelativeLayout>
 
 
@@ -60,7 +86,7 @@
                 android:id="@+id/data_layout"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/start_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +94,7 @@
 
                 <TextView
                     android:id="@+id/trip_name_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -78,6 +105,7 @@
 
                 <TextView
                     android:id="@+id/dest_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -88,6 +116,7 @@
 
                 <TextView
                     android:id="@+id/source_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -98,6 +127,7 @@
 
                 <TextView
                     android:id="@+id/status_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -108,6 +138,7 @@
 
                 <TextView
                     android:id="@+id/time_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -118,6 +149,7 @@
 
                 <TextView
                     android:id="@+id/date_tv"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -128,6 +160,7 @@
 
                 <Space
                     android:id="@+id/space"
+                    style="@style/CustomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -156,12 +189,13 @@
                     app:srcCompat="@drawable/calendar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/start_btn"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/CustomButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/color_theme"
+                android:layout_margin="0dp"
+                android:padding="0dp"
                 android:text="@string/start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

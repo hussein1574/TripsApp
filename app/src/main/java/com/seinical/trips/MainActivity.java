@@ -20,10 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button signIn = findViewById(R.id.sign_in_btn);
         Button signUp = findViewById(R.id.sign_up_btn);
-        TextView appName = findViewById(R.id.app_name);
-        View img = findViewById(R.id.logo_view);
-        TextView E = findViewById(R.id.E);
-        mImgTest = findViewById(R.id.test_login);
+
 
         signIn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Login.class);
@@ -31,18 +28,6 @@ public class MainActivity extends AppCompatActivity {
         } );
         signUp.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Register.class);
-            startActivity(intent);
-        } );
-        appName.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, MyNotes.class);
-            startActivity(intent);
-        } );
-        img.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, AddTrip.class);
-            startActivity(intent);
-        } );
-        E.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, EditTrip.class);
             startActivity(intent);
         } );
 

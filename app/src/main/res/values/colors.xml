@@ -8,4 +8,22 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_theme">#BDF4EE</color>
+    <color name="classic_blue1">#d4e3f6</color>
+    <color name="classic_blue2">#aac8ed</color>
+    <color name="classic_blue3">#5692db</color>
+    <color name="classic_blue4">#2c77d2</color>
+    <color name="classic_blue5">#235fa8</color>
+    <color name="classic_blue6">#1d4e89</color>
+    <color name="classic_blue7">#1a477e</color>
+    <color name="classic_blue8">#112f54</color>
+    <color name="sepia1">#f7e6d3</color>
+    <color name="sepia2">#f7e6d3</color>
+    <color name="sepia3">#e8b67c</color>
+    <color name="sepia4">#e09e51</color>
+    <color name="sepia5">#d98625</color>
+    <color name="sepia6">#ad6b1e</color>
+    <color name="sepia7">#825016</color>
+    <color name="sepia8">#56350f</color>
+
+
 </resources>
